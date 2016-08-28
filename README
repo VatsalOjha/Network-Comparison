@@ -1,0 +1,31 @@
+Code to Analyze Communities for Identifying Structural Differences in Twitter Networks
+
+Names: Vatsal Ojha and Kaahan Radia under supervision of Dr. Ralucca Gera and Dr. Karl Schmitt
+
+Goal of Code: To partition and calculate metrics for individual communities in a network
+
+Purpose: To identify structural differences between different types of twitter retweet networks (malicious vs. non-malicious) to determine what metrics are useful in differentiating these networks
+
+Methodology:
+1. Use the "community" package to partition the given network into individual communities using the Louvain Algorithm
+	a. Documentation for package here: http://perso.crans.org/aynaud/communities/
+	b. Lines 11-14
+2. Loop through the graph to classify all edges within their individual communities
+3. Each loop, a new graph is created (nG) which represents the community graph
+4. Then metrics are calculated and appended to an array following with the graph being cleared
+5. Once loop is finished, 2 arrays (one representing a metric and another representing the number of nodes in the graph) are saved
+6. These arrays are written to a file to be saved for future analysis
+7. Then, once saved, run graphing.py for the grpahical representation of these numbers
+
+Parallelization:
+Often, with networks with large amounts of nodes and edges, the loop to classify all the edges takes very long
+To solve this, the code was split up and run simultaneously in different instances of python
+To Do This:
+1. Copy and paste all the code into a separate file
+2. In first file, change the "Sort" value in line 17 to a fraction so the line looks like "for i in range(0, Sort/2):"
+3. In the second file, change the 0 value in line 17 so it looks like "for i in range(Sort/2, Sort)"
+	a. All this does is split up the values in the dictionary so the for loop has to run through less values. For more splitting, simply change the fractions so it goes from 0 to Sort/n to (2*Sort)/n to (3*Sort)/n until it is (n*Sort)/n or Sort
+4. At the bottom of the second file (lines 32, 36 and 42), change the filename to a different file so the files don't overwrite each other
+5. Go to graphing.py and change the filepath for Random2 and Random22 (Lines 14 and 17) in the commented section to the filepath which you changed in the second file
+6. Run both instances together and it should complete quicker
+7. For more instances, redo the steps and make sure to change the Sort Fractions as said in 3.a. 
